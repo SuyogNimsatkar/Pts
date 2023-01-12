@@ -1,0 +1,87 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.center{
+  text-align:center;
+  padding:200px ;
+}
+
+.divhomeleader{
+  display: flex;
+  
+}
+.neuro{
+  height: 200px;
+  width: 290px;
+  margin-top: 40px;
+  background: url("./components/images/neuro.jpg");
+  background-size: contain;
+  margin-left: 100px;
+  border-radius: 10%;
+}
+.orthopadic{
+  height: 200px;
+  width: 290px;
+  margin-top: 40px;
+  background: url("./components/images/orthopadic.jpg");
+  background-size: contain;
+  margin-left: 100px;
+  border-radius: 10%;
+}
+.gynecologist{
+  height: 200px;
+  width: 290px;
+  margin-top: 40px;
+  background: url("./components/images/gynecologist.jpg");
+  background-size: contain;
+  margin-left: 100px;
+  border-radius: 10%;
+}
+
+.card-treatment{
+  text-align: center;
+  padding-top: 4px;
+  padding-bottom: 2px;
+  padding-left: 1px;
+  padding-right: 1px;
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 13%) 0px 1.6px 3.6px 0px, rgb(0 0 0 / 11%) 0px 0.3px 0.9px 0px;
+  transition: box-shadow 0.1s ease 0s;
+  
+}

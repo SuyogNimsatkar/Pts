@@ -1,0 +1,133 @@
+import React, { useState } from 'react'
+import { Form, Button, Col, Row } from "react-bootstrap";
+import { useNavigate } from 'react-router';
+import DoctorService from '../services/DoctorService';
+
+const DoctorRegistrationForm = () => {
+  const navigate = useNavigate();
+  const [doctorName, setDoctorName] = useState('');
+  const [doctorEmail, setDoctorEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [doctorQualification, setDoctorQualification] = useState('');
+  const [expertise, setExpertise] = useState('');
+  const [errors, setErrors] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const details = {doctorName, doctorEmail, password, doctorQualification, expertise}
+    const errors = validate({...details});
+    if(Object.keys(errors).length === 0){
+      DoctorService.doctorregister(details)
+      .then(response => {
+        // alert("Form submitted");
+        navigate('/HomeComponent');
+      })
+      .catch(error => {
+        console.log("error", error);
+      })
+    }
+    else{
+      setErrors(errors);
+    }
+  }
+
+  return (
+    <Form className="justify-content-md-center">
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={6}>
+          <h2>Doctor Registration Form</h2>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Doctor Name"
+              value={doctorName}
+              onChange={(e) => setDoctorName(e.target.value)}
+            />
+            {errors.doctorName && <p style={{ color: 'red' }}>{errors.doctorName}</p>}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Doctor Email"
+              value={doctorEmail}
+              onChange={(e) => setDoctorEmail(e.target.value)}
+            />
+            {errors.doctorEmail && <p style={{ color: 'red' }}>{errors.doctorEmail}</p>}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Qualification</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Qualification"
+              value={doctorQualification}
+              onChange={(e) => setDoctorQualification(e.target.value)}
+            />
+            {errors.doctorQualification && <p style={{ color: 'red' }}>{errors.doctorQualification}</p>}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Expertise</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Expertise"
+              value={expertise}
+              onChange={(e) => setExpertise(e.target.value)}
+            />
+            {errors.expertise && <p style={{ color: 'red' }}>{errors.expertise}</p>}
+          </Form.Group>
+
+          <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
+            Submit
+          </Button>
+        </Col>
+      </Row>
+    </Form>
+  );
+
+  function validate({ doctorName, doctorEmail, password, doctorQualification, expertise }) {
+    let errors = {};
+    if (!doctorName?.trim()) {
+      errors.doctorName = 'Name Required';
+    }
+
+    if (!doctorEmail) {
+      errors.doctorEmail = "Email Required";
+    }
+    // if (!/\S+@\S+\.\S+/.test(doctorEmail)) {
+    //   errors.doctorEmail = "Invalid Email";
+    // }
+
+    if (!password) {
+      errors.password = "password required";
+    }
+    // if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password)) {
+    //   errors.password = "Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters";
+    // }
+
+    if (!doctorQualification) {
+      errors.doctorQualification = "Qualification Required";
+    }
+
+    if (!expertise) {
+      errors.expertise = "Expertise Required";
+    }
+  }
+}
+
+export default DoctorRegistrationForm;
